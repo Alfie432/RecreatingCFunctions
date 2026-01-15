@@ -1,45 +1,61 @@
 #include <stdio.h>
 
-int stringCompare(char *arrayOne, char *arrayTwo);
+void append(char* string1, char* string2);
+int stringLength(char *array);
 
 int main(void)
 {
-    char string1[] = "Hello";
-    char string2[] = "Hello";
+    char str1[50] = "My name is ";
+    char str2[] = "Alfie Dan Rickoy Alpha Jeslin";
 
-    // when S1 = h, return 32, when S2 = h, return -32, else return 0
+    append(str1, str2);
 
-    int result = stringCompare(string1, string2);
-
-    if (result == 0)
-    {
-        printf("Both strings are the same!\n");
-    }
-    else
-    {
-        printf("Both strings are not the same!\n");
-    }
+    printf("%s\n", str1);
 
     return 0;
 }
 
-int stringCompare(char *arrayOne, char *arrayTwo)
+
+void append(char* string1, char* string2)
 {
-    int i = 0;
+    int counter = 0; 
 
-    while (arrayOne[i] != 0)
+    // find the location of the \0, then add string2 starting from that location
+    while (0 == 0)
     {
-        if (arrayOne[i] > arrayTwo[i])
+        // if its the null terminator
+        if (string1[counter] == 0)
         {
-            return 32;
-        }
-        else if (arrayOne[i] < arrayTwo[i])
-        {
-            return -32;
-        }
+            break;
+        } 
 
+        counter++;
+    }
+
+    printf("%d\n", counter);
+
+    int length = stringLength(string2);
+
+    printf("%d\n", length);
+
+    for (int i = counter; i < (length+counter); i++)
+    {
+        string1[i] = string2[i - counter];
+    }
+}
+
+
+int stringLength(char *array)
+{
+    int length = 0;    
+    int i = 0;
+    
+    // instead of trying to find a counter (N) to count with, we can just traverse the memory starting from the given ptr, until we hit a NUL
+    while (array[i] != '\0')
+    {
+        length++;
         i++;
     }
 
-    return 0;
+    return length;
 }
